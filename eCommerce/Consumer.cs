@@ -16,6 +16,7 @@ namespace eCommerce
         //constructor
         public Consumer()
         {
+            Console.WriteLine("Welcome to the store, customer!");
             firstName = SetFirstName();
             lastName = SetLastName();
             shoppingCart = new ShoppingCart();
@@ -25,6 +26,7 @@ namespace eCommerce
         //methods
         public string SetFirstName()
         {
+            
             Console.Write("Please enter your first name: ");
             return Console.ReadLine();
         }

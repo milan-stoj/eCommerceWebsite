@@ -18,8 +18,6 @@ namespace eCommercePlatform
             Product speakers = new Product(1004, "Speakers", "Electronics", 39.99);
             Product tent = new Product(1005, "Camping Tent", "Outdoors", 299.99);
 
-            Console.WriteLine(ball);
-
             Platform mySite = new Platform();
             Consumer customer = new Consumer();
             mySite.UsePlatform(customer);
