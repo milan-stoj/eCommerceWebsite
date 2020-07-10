@@ -52,7 +52,7 @@ namespace eCommerce
             {
                 Console.Clear();
                 Console.WriteLine($"Online Web Store --- Welcome Customer {customer.returnFirstName()}");
-                Console.WriteLine("------------------------------------------");
+                Console.WriteLine("---------------------------------");
                 Console.WriteLine("[1] Show Products\t[2] View Cart\t[3] Select Product");
                 Console.WriteLine("---------------------------------");
                 Console.Write("Please enter your selection: ");
@@ -88,7 +88,12 @@ namespace eCommerce
                         return item;
                     }
                 }
-                Console.Write($"{name} is not a valid product. Try again!: ");
+                Console.WriteLine($"{name} is not a valid product. ");
+                foreach(Product product in inventory)
+                {
+                    Console.WriteLine(product.Name());
+                }
+                Console.Write("\nTry from the list above:");
                 name = Console.ReadLine();
             }
         }
