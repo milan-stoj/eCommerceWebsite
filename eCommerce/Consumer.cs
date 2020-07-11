@@ -16,7 +16,6 @@ namespace eCommerce
         //constructor
         public Consumer()
         {
-            Console.WriteLine("Welcome to the store, customer!");
             firstName = SetFirstName();
             lastName = SetLastName();
             shoppingCart = new ShoppingCart();
@@ -42,22 +41,22 @@ namespace eCommerce
             return Console.ReadLine();
         }
 
-        public void ShowProducts(List<Product> inventory)
+        public void ShowProducts(List<Product> inventory, Platform platform)
         {
             Console.Clear();
-            Console.WriteLine("ONLINE WEB STORE");
-            Console.WriteLine("------------------------------------------");
+            platform.PrintHeader();
+
             foreach (Product item in inventory)
             {
                 Console.WriteLine(item.Name());
             }
-            Console.WriteLine("These are the products currently in stock. Press enter to return to main menu.");
+            Console.WriteLine("\nThese are the products currently in stock. Press enter to return to main menu.\n");
             Console.ReadLine();
         }
 
-        public string SearchForProduct()
+        public string SearchForProduct(Platform platform)
         {
-            Console.Clear();
+            platform.PrintHeader();
             Console.Write("Enter Product Name: ");
             return Console.ReadLine();
         }
@@ -73,8 +72,9 @@ namespace eCommerce
             shoppingCart.AddToCart(product);
         }
 
-        public void ViewShoppingCart()
+        public void ViewShoppingCart(Platform platform)
         {
+            platform.PrintHeader();
             shoppingCart.ShowItems();
         }
 

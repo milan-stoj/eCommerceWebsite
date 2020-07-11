@@ -35,6 +35,27 @@ namespace eCommerce
         }
 
         //methods
+        
+        public void PrintHeader()
+        {
+            Console.Clear();
+            string title = @"
+
+                    /$$$$$$  /$$                          
+                   /$$__  $$| $$                          
+          /$$$$$$ | $$  \__/| $$$$$$$   /$$$$$$   /$$$$$$ 
+         /$$__  $$|  $$$$$$ | $$__  $$ /$$__  $$ /$$__  $$
+        | $$$$$$$$ \____  $$| $$  \ $$| $$  \ $$| $$  \ $$
+        | $$_____/ /$$  \ $$| $$  | $$| $$  | $$| $$  | $$
+        |  $$$$$$$|  $$$$$$/| $$  | $$|  $$$$$$/| $$$$$$$/
+         \_______/ \______/ |__/  |__/ \______/ | $$____/ 
+                                                | $$      
+                                                | $$      
+                                                |__/      
+        ";
+            Console.WriteLine(title);
+        }
+
         private Product CreateProduct(int inventorySku, string name, string category, double price)
         {
             Product product = new Product(inventorySku, name, category, price);
@@ -46,28 +67,26 @@ namespace eCommerce
             inventory.Add(product);
         }
 
-        public void UsePlatform(Consumer customer)
+        public void UsePlatform(Consumer customer, Platform platform)
         {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine($"Online Web Store --- Welcome Customer {customer.returnFirstName()}");
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("[1] Show Products\t[2] View Cart\t[3] Select Product");
-                Console.WriteLine("---------------------------------");
-                Console.Write("Please enter your selection: ");
+                PrintHeader();
+                Console.WriteLine($"\nWelcome to the eShop, {customer.returnFirstName()}!\n");
+                Console.WriteLine("[1] Show Products\n[2] View Cart\n[3] Select Product");
+                Console.Write("\nPlease enter your selection: ");
                 string selection;
                 selection = Console.ReadLine();
                 switch (selection)
                 {
                     case "1":
-                        customer.ShowProducts(inventory);
+                        customer.ShowProducts(inventory, platform);
                         break;
                     case "2":
-                        customer.ViewShoppingCart();
+                        customer.ViewShoppingCart(platform);
                         break;
                     case "3":
-                        Product selectedProduct = GetProduct(customer.SearchForProduct());
+                        Product selectedProduct = GetProduct(customer.SearchForProduct(platform));
                         DisplayProduct(selectedProduct, customer);
                         break;
                     default:
@@ -93,13 +112,14 @@ namespace eCommerce
                 {
                     Console.WriteLine(product.Name());
                 }
-                Console.Write("\nTry from the list above:");
+                Console.Write("\nAll products in stock listed above. Try again: ");
                 name = Console.ReadLine();
             }
         }
         public void DisplayProduct(Product product, Consumer customer)
         {
             Console.Clear();
+            PrintHeader();
             Console.WriteLine("SKU\tNAME\t\tPRICE\t\tAVERAGE RATING");
             Console.WriteLine("----------------------------------------------------------------------------------");
             Console.WriteLine($"{product.sku()}\t{product.Name()}\t${product.Price()}\t\t{product.AverageRating()}");

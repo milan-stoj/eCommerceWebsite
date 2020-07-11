@@ -32,7 +32,6 @@ namespace eCommerce
 
         public void ShowItems()
         {
-            Console.Clear();
             if (products.Count() == 0)
             {
                 Console.WriteLine("The cart is empty. Press enter to return to the main menu.");
